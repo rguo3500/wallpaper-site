@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://wallpaper-gallery.com/</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Category Pages -->
+    <url>
+        <loc>https://wallpaper-gallery.com/anime/</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/girl/</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/mood/</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Wallpaper Detail Pages -->
+    <!-- Generated dynamically by generate-detail-pages-en.py -->
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/1.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/anime/1.jpg</image:loc>
+            <image:title>Pink Girly Anime Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/2.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/anime/2.jpg</image:loc>
+            <image:title>Cyberpunk Anime Girl</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/3.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/anime/3.jpg</image:loc>
+            <image:title>Dreamy Starry Sky Anime Girl</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/4.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/girl/1.png</image:loc>
+            <image:title>Girl in City Night View</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/5.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/girl/2.jpg</image:loc>
+            <image:title>Sunflower Girl Sunny Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/6.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/girl/3.jpg</image:loc>
+            <image:title>Elegant Girl Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/7.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/mood/1.jpg</image:loc>
+            <image:title>Serene Mood Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/8.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/mood/2.jpeg</image:loc>
+            <image:title>Lonely Melancholy Mood Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/9.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/girl/2.jpg</image:loc>
+            <image:title>Healing Warm Mood Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/10.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/anime/1.jpg</image:loc>
+            <image:title>Night Serenity Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/11.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/girl/1.png</image:loc>
+            <image:title>Vibrant Youth Wallpaper</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/wallpaper/12.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://wallpaper-gallery.com/assets/images/anime/2.jpg</image:loc>
+            <image:title>Dreamy Purple Wallpaper</image:title>
+        </image:image>
+    </url>
+
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://wallpaper-gallery.com/privacy.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wallpaper-gallery.com/terms.html</loc>
+        <lastmod>2024-07-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

@@ -1,0 +1,208 @@
+/**
+ * Smart Recommendation Engine V3.3
+ * Calculates wallpaper relevance based on Tag, Color, Category weights.
+ */
+
+class RecommendationEngine {
+    constructor(wallpapers) {
+        this.wallpapers = wallpapers;
+        this.weights = {
+            tagMatch: 3,      // 标签匹配权重最高
+            colorMatch: 2,    // 颜色匹配权重中等
+            categoryMatch: 1  // 分类匹配权重较低
+        };
+    }
+
+    /**
+     * 计算两张壁纸之间的相似度分数
+     */
+    calculateSimilarity(wallpaper1, wallpaper2) {
+        let score = 0;
+
+        // 标签匹配（权重最高）
+        const commonTags = wallpaper1.tags.filter(tag => 
+            wallpaper2.tags.includes(tag)
+        );
+        score += commonTags.length * this.weights.tagMatch;
+
+        // 颜色匹配
+        if (wallpaper1.mainColor === wallpaper2.mainColor) {
+            score += this.weights.colorMatch;
+        }
+
+        // 分类匹配
+        if (wallpaper1.category === wallpaper2.category) {
+            score += this.weights.categoryMatch;
+        }
+
+        // 系列匹配（如果属于同一系列，额外加分）
+        if (wallpaper1.collection === wallpaper2.collection) {
+            score += 5;
+        }
+
+        return score;
+    }
+
+    /**
+     * 为给定的壁纸获取推荐列表
+     */
+    getRecommendations(wallpaperSlug, limit = 5) {
+        const currentWallpaper = this.wallpapers.find(w => w.slug === wallpaperSlug);
+        if (!currentWallpaper) return [];
+
+        const recommendations = this.wallpapers
+            .filter(w => w.slug !== wallpaperSlug)
+            .map(w => ({
+                ...w,
+                score: this.calculateSimilarity(currentWallpaper, w)
+            }))
+            .sort((a, b) => b.score - a.score)
+            .slice(0, limit);
+
+        return recommendations;
+    }
+
+    /**
+     * 获取同系列的壁纸
+     */
+    getSeriesWallpapers(collectionSlug) {
+        return this.wallpapers.filter(w => w.collection === collectionSlug);
+    }
+
+    /**
+     * 获取同颜色的壁纸
+     */
+    getColorWallpapers(mainColor, limit = 4) {
+        return this.wallpapers
+            .filter(w => w.mainColor === mainColor)
+            .slice(0, limit);
+    }
+
+    /**
+     * 获取同分类的壁纸
+     */
+    getCategoryWallpapers(category, limit = 4) {
+        return this.wallpapers
+            .filter(w => w.category === category)
+            .slice(0, limit);
+    }
+
+    /**
+     * 获取热门壁纸（基于浏览和下载）
+     */
+    getTrendingWallpapers(limit = 5) {
+        return this.wallpapers
+            .sort((a, b) => {
+                const scoreA = (a.views * 0.3) + (a.downloads * 0.7);
+                const scoreB = (b.views * 0.3) + (b.downloads * 0.7);
+                return scoreB - scoreA;
+            })
+            .slice(0, limit);
+    }
+
+    /**
+     * 获取高评分壁纸
+     */
+    getTopRatedWallpapers(limit = 5) {
+        return this.wallpapers
+            .sort((a, b) => b.rating - a.rating)
+            .slice(0, limit);
+    }
+
+    /**
+     * 生成推荐理由文本
+     */
+    getRecommendationReason(currentWallpaper, recommendedWallpaper) {
+        const reasons = [];
+
+        // 检查共同标签
+        const commonTags = currentWallpaper.tags.filter(tag => 
+            recommendedWallpaper.tags.includes(tag)
+        );
+        if (commonTags.length > 0) {
+            reasons.push(`Both tagged with "${commonTags[0]}"`);
+        }
+
+        // 检查颜色匹配
+        if (currentWallpaper.mainColor === recommendedWallpaper.mainColor) {
+            reasons.push(`Same ${currentWallpaper.mainColor} color theme`);
+        }
+
+        // 检查分类匹配
+        if (currentWallpaper.category === recommendedWallpaper.category) {
+            reasons.push(`Same ${currentWallpaper.category} category`);
+        }
+
+        // 检查系列匹配
+        if (currentWallpaper.collection === recommendedWallpaper.collection) {
+            reasons.push(`From the same collection`);
+        }
+
+        return reasons.length > 0 ? reasons[0] : "You might also like this";
+    }
+}
+
+// 初始化推荐引擎
+let recommendationEngine = null;
+
+function initRecommendationEngine() {
+    if (typeof WALLPAPER_DATA !== 'undefined') {
+        recommendationEngine = new RecommendationEngine(WALLPAPER_DATA);
+    }
+}
+
+// 页面加载时初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRecommendationEngine);
+} else {
+    initRecommendationEngine();
+}
+
+/**
+ * 在 HTML 中渲染推荐壁纸
+ */
+function renderRecommendations(containerId, recommendations) {
+    const container = document.getElementById(containerId);
+    if (!container || !recommendations || recommendations.length === 0) return;
+
+    container.innerHTML = recommendations.map(wp => `
+        <div class="masonry-item">
+            <a href="/wallpaper/${wp.slug}.html">
+                <img src="${wp.image}" alt="${wp.title}" loading="lazy">
+                <div class="item-info">
+                    <div class="item-title">${wp.title}</div>
+                    <div class="item-meta">
+                        <span>👁 ${wp.views.toLocaleString()}</span>
+                        <span>⭐ ${wp.rating}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    `).join('');
+}
+
+/**
+ * 在详情页中自动加载推荐
+ */
+function loadDetailPageRecommendations(currentSlug) {
+    if (!recommendationEngine) return;
+
+    // 获取推荐壁纸
+    const recommendations = recommendationEngine.getRecommendations(currentSlug, 5);
+    
+    // 渲染到相关推荐容器
+    renderRecommendations('related-wallpapers', recommendations);
+
+    // 获取同系列壁纸
+    const currentWallpaper = WALLPAPER_DATA.find(w => w.slug === currentSlug);
+    if (currentWallpaper && currentWallpaper.collection) {
+        const seriesWallpapers = recommendationEngine.getSeriesWallpapers(currentWallpaper.collection);
+        renderRecommendations('series-wallpapers', seriesWallpapers);
+    }
+
+    // 获取同颜色壁纸
+    if (currentWallpaper && currentWallpaper.mainColor) {
+        const colorWallpapers = recommendationEngine.getColorWallpapers(currentWallpaper.mainColor, 4);
+        renderRecommendations('color-wallpapers', colorWallpapers);
+    }
+}

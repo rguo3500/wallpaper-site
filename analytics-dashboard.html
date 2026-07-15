@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Wallpaper Hub Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: #1c1c1e;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu a {
+            color: #a1a1a6;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #0a84ff;
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .metric-card h3 {
+            color: #86868b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+
+        .metric-change {
+            font-size: 0.9rem;
+            color: #34c759;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .chart-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8eb 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #86868b;
+        }
+
+        .table-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .table-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f5f5f7;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #1d1d1f;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag-badge {
+            background: #0a84ff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .sidebar-menu {
+                display: flex;
+                gap: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>📊 Analytics</h2>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active">📈 Dashboard</a></li>
+                <li><a href="/admin-v2.html">📤 Upload</a></li>
+                <li><a href="#">📋 Wallpapers</a></li>
+                <li><a href="#">⚙️ Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>📊 Analytics Dashboard</h1>
+                <p style="color: #86868b;">Real-time performance metrics and insights</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>👁 Total Views</h3>
+                    <div class="metric-value" id="totalViews">125,600</div>
+                    <div class="metric-change">↑ 12.5% from last month</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>⬇️ Total Downloads</h3>
+                    <div class="metric-value" id="totalDownloads">45,800</div>
+                    <div class="metric-change">↑ 8.3% from last month</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>⭐ Avg Rating</h3>
+                    <div class="metric-value" id="avgRating">4.7</div>
+                    <div class="metric-change">Based on all wallpapers</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>📦 Total Wallpapers</h3>
+                    <div class="metric-value" id="totalWallpapers">1,234</div>
+                    <div class="metric-change">3 new this week</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-container">
+                <h2>📈 Views & Downloads Trend</h2>
+                <div class="chart-placeholder">
+                    Chart: Views and Downloads over time (integrate Chart.js or similar)
+                </div>
+            </div>
+
+            <!-- Popular Tags -->
+            <div class="table-container">
+                <h2>🏷️ Popular Tags</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Wallpapers</th>
+                            <th>Views</th>
+                            <th>Downloads</th>
+                        </tr>
+                    </thead>
+                    <tbody id="popularTagsTable">
+                        <tr>
+                            <td><span class="tag-badge">cute</span></td>
+                            <td>234</td>
+                            <td>45,600</td>
+                            <td>12,300</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-badge">anime</span></td>
+                            <td>456</td>
+                            <td>38,900</td>
+                            <td>11,200</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-badge">pink</span></td>
+                            <td>156</td>
+                            <td>28,400</td>
+                            <td>8,900</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-badge">4k</span></td>
+                            <td>567</td>
+                            <td>25,600</td>
+                            <td>7,800</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Popular Categories -->
+            <div class="table-container" style="margin-top: 30px;">
+                <h2>📂 Popular Categories</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Wallpapers</th>
+                            <th>Views</th>
+                            <th>Downloads</th>
+                            <th>Avg Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anime</td>
+                            <td>456</td>
+                            <td>52,300</td>
+                            <td>18,900</td>
+                            <td>4.8 ⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Dream Zodiac</td>
+                            <td>234</td>
+                            <td>38,600</td>
+                            <td>14,200</td>
+                            <td>4.9 ⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Girls</td>
+                            <td>189</td>
+                            <td>22,100</td>
+                            <td>8,300</td>
+                            <td>4.6 ⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Nature</td>
+                            <td>145</td>
+                            <td>12,600</td>
+                            <td>4,400</td>
+                            <td>4.5 ⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Top Wallpapers -->
+            <div class="table-container" style="margin-top: 30px;">
+                <h2>🔥 Top Wallpapers</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Views</th>
+                            <th>Downloads</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Golden Dragon Dream Zodiac</a></td>
+                            <td>Dream Zodiac</td>
+                            <td>8,902</td>
+                            <td>3,421</td>
+                            <td>5.0 ⭐</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Pink Girly Anime Wallpaper</a></td>
+                            <td>Anime</td>
+                            <td>5,678</td>
+                            <td>1,234</td>
+                            <td>4.8 ⭐</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Cyberpunk Anime Girl</a></td>
+                            <td>Anime</td>
+                            <td>4,500</td>
+                            <td>2,100</td>
+                            <td>4.7 ⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Search Keywords -->
+            <div class="table-container" style="margin-top: 30px;">
+                <h2>🔍 Top Search Keywords</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>Searches</th>
+                            <th>Click-through Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pink anime wallpaper</td>
+                            <td>2,345</td>
+                            <td>42.5%</td>
+                        </tr>
+                        <tr>
+                            <td>dragon zodiac</td>
+                            <td>1,890</td>
+                            <td>38.2%</td>
+                        </tr>
+                        <tr>
+                            <td>cute girl wallpaper</td>
+                            <td>1,567</td>
+                            <td>35.8%</td>
+                        </tr>
+                        <tr>
+                            <td>4k wallpaper</td>
+                            <td>1,234</td>
+                            <td>32.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/data.js"></script>
+    <script>
+        // 从 STATS 对象加载数据
+        if (typeof STATS !== 'undefined') {
+            document.getElementById('totalViews').textContent = STATS.totalViews.toLocaleString();
+            document.getElementById('totalDownloads').textContent = STATS.totalDownloads.toLocaleString();
+        }
+
+        if (typeof WALLPAPER_DATA !== 'undefined') {
+            document.getElementById('totalWallpapers').textContent = WALLPAPER_DATA.length.toLocaleString();
+            
+            const avgRating = (WALLPAPER_DATA.reduce((sum, w) => sum + w.rating, 0) / WALLPAPER_DATA.length).toFixed(1);
+            document.getElementById('avgRating').textContent = avgRating;
+        }
+    </script>
+</body>
+</html>

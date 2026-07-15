@@ -1,0 +1,26 @@
+# Robots.txt for Wallpaper Gallery - HD Mobile Wallpapers
+# Directs search engine crawlers on how to crawl and index the site.
+
+# Allow all crawlers to access the entire site
+User-agent: *
+Allow: /
+
+# Disallow specific paths (if any, e.g., admin areas)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Specify the location of the sitemap
+Sitemap: https://wallpaper-gallery.com/sitemap.xml
+
+# Crawl-delay for polite crawling (optional, not supported by Googlebot)
+Crawl-delay: 1
+
+# Googlebot specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bingbot specific rules
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

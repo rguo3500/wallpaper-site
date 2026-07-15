@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta property="og:title" content="{{TITLE}} - Wallpaper Hub">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:image" content="{{IMAGE_URL}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lovexiaoyue.cc.cd/wallpaper/{{SLUG}}.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>{{TITLE}} | Wallpaper Hub - Free Download</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "ImageObject",
+        "name": "{{TITLE}}",
+        "description": "{{DESCRIPTION}}",
+        "url": "{{IMAGE_URL}}",
+        "width": "{{WIDTH}}",
+        "height": "{{HEIGHT}}",
+        "uploadDate": "{{UPLOAD_DATE}}",
+        "author": {
+            "@type": "Organization",
+            "name": "Wallpaper Hub"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://lovexiaoyue.cc.cd/"},
+                {"@type": "ListItem", "position": 2, "name": "{{CATEGORY}}", "item": "https://lovexiaoyue.cc.cd/category/{{CATEGORY_SLUG}}.html"},
+                {"@type": "ListItem", "position": 3, "name": "{{TITLE}}", "item": "https://lovexiaoyue.cc.cd/wallpaper/{{SLUG}}.html"}
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🎨 Wallpaper Hub</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/category/{{CATEGORY_SLUG}}.html">{{CATEGORY}}</a></li>
+            <li><a href="/tag/">Tags</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="search-trigger">🔍</button>
+            <button class="theme-toggle">🌓</button>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/category/{{CATEGORY_SLUG}}.html">{{CATEGORY}}</a>
+        <span>/</span>
+        <span>{{TITLE}}</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="detail-container">
+        <!-- Left: Image & Info -->
+        <div>
+            <div class="main-image-wrapper">
+                <img src="{{IMAGE_URL}}" alt="{{TITLE}}" loading="lazy">
+            </div>
+
+            <!-- Color Palette -->
+            <div class="info-card">
+                <h3>Color Palette</h3>
+                <div class="color-palette">
+                    {{COLOR_SWATCHES}}
+                </div>
+            </div>
+
+            <!-- Related Wallpapers -->
+            <div class="info-card">
+                <h3>Related Wallpapers</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    {{RELATED_WALLPAPERS}}
+                </div>
+            </div>
+
+            <!-- Same Series -->
+            <div class="info-card" id="same-series" style="display: none;">
+                <h3>Same Series</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    {{SERIES_WALLPAPERS}}
+                </div>
+            </div>
+
+            <!-- Same Color -->
+            <div class="info-card" id="same-color" style="display: none;">
+                <h3>Same Color</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    {{COLOR_WALLPAPERS}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Sidebar -->
+        <div class="sidebar-info">
+            <!-- Download Button -->
+            <a href="{{IMAGE_URL}}" download class="btn-download">⬇️ Download Wallpaper</a>
+
+            <!-- Basic Info -->
+            <div class="info-card">
+                <h3>Wallpaper Info</h3>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <label>Resolution</label>
+                        <span>{{RESOLUTION}}</span>
+                    </div>
+                    <div class="meta-item">
+                        <label>Aspect Ratio</label>
+                        <span>{{ASPECT_RATIO}}</span>
+                    </div>
+                    <div class="meta-item">
+                        <label>Device</label>
+                        <span>{{DEVICE}}</span>
+                    </div>
+                    <div class="meta-item">
+                        <label>Category</label>
+                        <span><a href="/category/{{CATEGORY_SLUG}}.html">{{CATEGORY}}</a></span>
+                    </div>
+                    <div class="meta-item">
+                        <label>Downloads</label>
+                        <span>{{DOWNLOADS}}</span>
+                    </div>
+                    <div class="meta-item">
+                        <label>Rating</label>
+                        <span>⭐ {{RATING}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="info-card">
+                <h3>Tags</h3>
+                <div class="tag-cloud">
+                    {{TAG_LINKS}}
+                </div>
+            </div>
+
+            <!-- Collection Info -->
+            <div class="info-card" id="collection-info" style="display: none;">
+                <h3>Collection</h3>
+                <p><a href="/collection/{{COLLECTION_SLUG}}.html">{{COLLECTION_NAME}}</a></p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="info-card">
+                <h3>Statistics</h3>
+                <div style="font-size: 0.9rem; line-height: 1.8;">
+                    <div>👁 Views: {{VIEWS}}</div>
+                    <div>⬇️ Downloads: {{DOWNLOADS}}</div>
+                    <div>⭐ Rating: {{RATING}}/5.0</div>
+                    <div>📅 Added: {{UPLOAD_DATE}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prompt Section -->
+    <section class="section" style="background: var(--card-bg); border-radius: 18px; padding: 60px 5%;">
+        <h2 class="section-title">🎨 AI Prompt Information</h2>
+        <div style="max-width: 100%; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                    <td style="padding: 10px; font-weight: 600;">Model</td>
+                    <td style="padding: 10px;">{{MODEL}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                    <td style="padding: 10px; font-weight: 600;">Sampler</td>
+                    <td style="padding: 10px;">{{SAMPLER}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                    <td style="padding: 10px; font-weight: 600;">CFG Scale</td>
+                    <td style="padding: 10px;">{{CFG}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                    <td style="padding: 10px; font-weight: 600;">Seed</td>
+                    <td style="padding: 10px;">{{SEED}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Positive Prompt</h3>
+        <div class="prompt-box">
+            {{PROMPT}}
+            <button class="copy-btn" onclick="copyToClipboard('{{PROMPT}}')">Copy</button>
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Negative Prompt</h3>
+        <div class="prompt-box">
+            {{NEGATIVE_PROMPT}}
+            <button class="copy-btn" onclick="copyToClipboard('{{NEGATIVE_PROMPT}}')">Copy</button>
+        </div>
+    </section>
+
+    <!-- Download Guide -->
+    <section class="section">
+        <h2 class="section-title">📥 Download Guide</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+                <h3>📱 For iPhone</h3>
+                <ol style="padding-left: 20px;">
+                    <li>Click the Download button above</li>
+                    <li>Open Photos app</li>
+                    <li>Go to Settings > Wallpaper > Add New</li>
+                    <li>Select the downloaded image</li>
+                </ol>
+            </div>
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+                <h3>🤖 For Android</h3>
+                <ol style="padding-left: 20px;">
+                    <li>Click the Download button above</li>
+                    <li>Open Settings > Display</li>
+                    <li>Select Wallpaper</li>
+                    <li>Choose the downloaded image</li>
+                </ol>
+            </div>
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+                <h3>💻 For Desktop</h3>
+                <ol style="padding-left: 20px;">
+                    <li>Right-click the image</li>
+                    <li>Select "Save image as..."</li>
+                    <li>Set as wallpaper via system settings</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="background: var(--card-bg); border-radius: 18px; padding: 60px 5%;">
+        <h2 class="section-title">❓ FAQ</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <details>
+                <summary>Can I use this wallpaper commercially?</summary>
+                <div class="faq-content">All wallpapers are free for personal use. For commercial use, please contact us for licensing information.</div>
+            </details>
+            <details>
+                <summary>What's the best resolution for my device?</summary>
+                <div class="faq-content">This wallpaper is optimized for {{DEVICE}} with {{RESOLUTION}} resolution. It should work on most devices, but you can crop or resize as needed.</div>
+            </details>
+            <details>
+                <summary>How can I create similar wallpapers?</summary>
+                <div class="faq-content">You can use the Prompt information above with AI image generation tools like Stable Diffusion, Midjourney, or DALL-E.</div>
+            </details>
+            <details>
+                <summary>Is this image AI-generated?</summary>
+                <div class="faq-content">Yes, this wallpaper was created using {{MODEL}}, an advanced AI image generation model.</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h3>Wallpaper Hub V3.2</h3>
+                <p>Your source for premium AI-generated wallpapers.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="/category/anime.html">Anime</a></li>
+                    <li><a href="/category/dream-zodiac.html">Zodiac</a></li>
+                    <li><a href="/category/minimal.html">Minimal</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Wallpaper Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+    </script>
+    <script src="/js/data.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

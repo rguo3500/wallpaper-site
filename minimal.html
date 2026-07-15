@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Wallpapers | HD Mobile Backgrounds | Wallpaper Site Pro</title>
+    <meta name="description" content="Browse our collection of high-quality Mood wallpapers for your mobile phone. Free to download in 4K resolution.">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Wallpaper Pro</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/category/phone.html">Phone</a></li>
+            <li><a href="/category/tablet.html">Tablet</a></li>
+            <li><a href="/category/dream-zodiac.html">Zodiac</a></li>
+            <li><a href="/category/zodiac-constellation.html">Constellation</a></li>
+            <li><a href="/category/anime.html">Anime</a></li>
+        </ul>
+        <button class="theme-toggle">🌓</button>
+    </nav>
+
+    <header class="hero" style="padding: 60px 5%;">
+        <h1>Mood Wallpapers</h1>
+        <p>Wallpapers that match your current vibe and feelings.</p>
+    </header>
+
+    <main>
+        <div class="wallpaper-grid" id="category-grid">
+            <!-- Wallpapers for this category will be rendered here -->
+        </div>
+        
+        <section style="padding: 40px 5%; background: var(--card-bg); margin-top: 40px; border-radius: 18px;">
+            <h2>About Mood Wallpapers</h2>
+            <p style="margin-top: 15px; color: var(--secondary-text);">Find the best Mood wallpapers for your phone. Our Mood collection features high-definition backgrounds that are perfect for any mobile screen.</p>
+        </section>
+    </main>
+
+    <script src="/js/data.js"></script>
+    <script>
+        const categorySlug = "mood";
+        document.addEventListener('DOMContentLoaded', () => {
+            const filtered = WALLPAPER_DATA.filter(wp => wp.category === categorySlug);
+            const grid = document.getElementById('category-grid');
+            grid.innerHTML = filtered.map(wp => `
+                <a href="/wallpaper/${wp.slug}.html" class="card">
+                    <img src="${wp.image}" alt="${wp.title}" loading="lazy">
+                    <div class="card-info">
+                        <div class="card-title">${wp.title}</div>
+                        <div class="card-meta">${wp.resolution}</div>
+                    </div>
+                </a>
+            `).join('');
+        });
+    </script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

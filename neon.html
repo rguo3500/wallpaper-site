@@ -1,0 +1,91 @@
+/**
+ * Wallpaper Hub V3.0 - Core Logic
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    initSearch();
+    if (document.querySelector('.masonry-grid')) {
+        initMasonry();
+    }
+});
+
+// Theme Management
+function initTheme() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
+}
+
+// Search Logic
+function initSearch() {
+    const searchInput = document.querySelector('.search-box input');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+    });
+}
+
+// Masonry/Infinite Scroll Simulation
+function initMasonry() {
+    // Simple lazy loading for images
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src || img.src;
+                    observer.unobserve(img);
+                }
+            });
+        });
+        images.forEach(img => observer.observe(img));
+    }
+}
+
+// Recommendation Engine (Simple Tag-based)
+function getRecommendations(currentWallpaper, limit = 6) {
+    return WALLPAPER_DATA
+        .filter(w => w.id !== currentWallpaper.id)
+        .map(w => {
+            let score = 0;
+            // Category match
+            if (w.category === currentWallpaper.category) score += 5;
+            // Collection match
+            if (w.collection === currentWallpaper.collection) score += 10;
+            // Tags match
+            const commonTags = w.tags.filter(t => currentWallpaper.tags.includes(t));
+            score += commonTags.length * 2;
+            return { ...w, score };
+        })
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit);
+}
+
+// Utility: Copy Prompt
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = originalText, 2000);
+        }
+    });
+}
